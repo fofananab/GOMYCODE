@@ -1,0 +1,6 @@
+CREATE TABLE            CATEGORIES  (
+   CATEGORY_CODE       INt(6)                       NOT NULL,
+   CATEGORY_NAME        VARCHAR(25)                    NOT NULL,
+   DESCRIPTION          VARCHAR(100)                   NOT NULL,
+   CONSTRAINT PK_CATEGORIES PRIMARY KEY (CATEGORY_CODE)
+   );
