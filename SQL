@@ -4,6 +4,7 @@ CREATE TABLE            CATEGORIES  (
    DESCRIPTION          VARCHAR(100)                   NOT NULL,
    CONSTRAINT PK_CATEGORIES PRIMARY KEY (CATEGORY_CODE)
    );
+
 CREATE TABLE            CUSTOMERS   (
    CUSTOMER_CODE          CHAR(5)                         NOT NULL,
    COMPANY              CHAR(40)                   NOT NULL,
@@ -15,3 +16,27 @@ CREATE TABLE            CUSTOMERS   (
    FAX                 VARCHAR(24),
    CONSTRAINT PK_CUSTOMERS PRIMARY KEY (CUSTOMER_CODE)
   );
+
+CREATE TABLE            ORDERS  (
+   ORDER_NUMBER           int(6)                       NOT NULL,
+    
+   CUSTOMER_CODE          CHAR(5)                         NOT NULL,
+   EMPLOYEE_NUMBER          int(6)                       NOT NULL,
+   ORDER_DATE	         DATE                            NOT NULL,
+   SHIP_DATE          		DATE,
+   SHIPPING_COST                 DECIMAL(8, 2),
+   CONSTRAINT PK_ORDERS  PRIMARY KEY (ORDER_NUMBER)
+    );
+
+#Table ORDER_DETAILS                                  
+
+CREATE TABLE            ORDER_DETAILS  (
+   ORDER_NUMBER         INT(6)                       NOT NULL,
+   PRODUCT_REF         INT(6)                       NOT NULL,
+   UNIT_PRICE          DECIMAL(8, 2)                  NOT NULL,
+   QUANTITY            DECIMAL(5, 2)                     NOT NULL,
+   DISCOUNT              FLOAT                           NOT NULL,
+   CONSTRAINT PK_DETAILS_ORDERS  PRIMARY KEY (ORDER_NUMBER , PRODUCT_REF )
+  );
+
+
