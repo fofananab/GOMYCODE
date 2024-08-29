@@ -39,4 +39,282 @@ CREATE TABLE            ORDER_DETAILS  (
    CONSTRAINT PK_DETAILS_ORDERS  PRIMARY KEY (ORDER_NUMBER , PRODUCT_REF )
   );
 
+CREATE TABLE EMPLOYEES (
+    EMPLOYEE_NUMBER INT(6) NOT NULL,
+    REPORTS_TO INT(6),
+    LAST_NAME VARCHAR(40) NOT NULL,
+    FIRST_NAME VARCHAR(30) NOT NULL,
+    POSITION VARCHAR(30) NOT NULL,
+    TITLE VARCHAR(5) NOT NULL,
+    BIRTH_DATE DATE NOT NULL,
+    HIRE_DATE DATE DEFAULT CURRENT_DATE,  -- Valeur par défaut : date actuelle
+    SALARY DECIMAL(8,2) NOT NULL,
+    COMMISSION DECIMAL(8,2),
+    CONSTRAINT PK_EMPLOYEES PRIMARY KEY (EMPLOYEE_NUMBER)
+);
+
+#Table: SUPPLIERS                                          
+
+CREATE TABLE            SUPPLIERS  (
+   SUPPLIER_NUMBER      INT(6)                       NOT NULL,
+   COMPANY             VARCHAR(40)                   NOT NULL,
+   ADDRESS             VARCHAR(60)                   NOT NULL,
+   CITY               VARCHAR(30)                    NOT NULL,
+   POSTAL_CODE         VARCHAR(10)                    NOT NULL,
+   COUNTRY                VARCHAR(15)                    NOT NULL,
+   PHONE          	 VARCHAR(24)                    NOT NULL,
+   FAX                 VARCHAR(24),
+   CONSTRAINT PK_SUPPLIERS PRIMARY KEY (SUPPLIER_NUMBER)
+  );
+
+#Table: PRODUCTS                                           
+CREATE TABLE            PRODUCTS (
+   PRODUCT_REF         INT(6)                       NOT NULL,
+   PRODUCT_NAME         VARCHAR(40)                   NOT NULL,
+   SUPPLIER_NUMBER      INT(6)                       NOT NULL,
+   CATEGORY_CODE     	 INT(6)                       NOT NULL,
+   QUANTITY            VARCHAR(30),
+   UNIT_PRICE       	DECIMAL(8,2)                     NOT NULL,
+   UNITS_IN_STOCK        INT(5),
+   UNITS_ON_ORDER   	 INT(5),
+   UNAVAILABLE	         INT(1),
+   CONSTRAINT PK_PRODUCTS  PRIMARY KEY (PRODUCT_REF)
+  );
+
+INSERT INTO EMPLOYEES VALUES (2, 2, 'Fuller', 'Andrew', 'Vice President', 'Dr.', '02/19/52', '08/14/92', 10000.00, NULL); 
+INSERT INTO EMPLOYEES VALUES (8, 2, 'Callahan', 'Laura', 'Sales Assistant', 'Miss', '01/09/58', '03/05/94', 2000.00, NULL);
+INSERT INTO EMPLOYEES VALUES (4, 2, 'Peacock', 'Margaret', 'Sales Representative', 'Mrs.', '09/19/58', '05/03/93', 2856.00, 250.00);
+INSERT INTO EMPLOYEES VALUES (3, 2, 'Leverling', 'Janet', 'Sales Representative', 'Miss', '08/30/63', '04/01/92', 3500.00, 1000.00);
+INSERT INTO EMPLOYEES VALUES (1, 2, 'Davolio', 'Nancy', 'Sales Representative', 'Miss', '12/08/68', '05/01/92', 3135.00, 1500.00);
+INSERT INTO EMPLOYEES VALUES (5, 2, 'Buchanan', 'Steven', 'Sales Manager', 'Mr.', '03/04/55', '10/17/93', 8000.00, NULL);
+INSERT INTO EMPLOYEES VALUES (9, 5, 'Dodsworth', 'Anne', 'Sales Representative', 'Miss', '07/02/69', '11/15/94', 2180.00, 0.00);
+INSERT INTO EMPLOYEES VALUES (6, 5, 'Suyama', 'Michael', 'Sales Representative', 'Mr.', '07/02/63', '10/17/93', 2534.00, 600.00);
+INSERT INTO EMPLOYEES VALUES (7, NULL, 'King', 'Robert', 'Sales Representative', 'Mr.', '05/29/60', '01/02/94', 2356.00, 800.00);
+
+INSERT INTO CATEGORIES VALUES (1, 'Beverages', 'Beverages, coffees, teas');
+INSERT INTO CATEGORIES VALUES (2, 'Condiments', 'Sauces, seasonings, and spices');
+INSERT INTO CATEGORIES VALUES (3, 'Desserts', 'Desserts and sweets');
+INSERT INTO CATEGORIES VALUES (4, 'Dairy Products', 'Cheeses');
+INSERT INTO CATEGORIES VALUES (5, 'Pasta and Cereals', 'Breads, biscuits, pasta, and cereals');
+INSERT INTO CATEGORIES VALUES (6, 'Meats', 'Prepared meats');
+INSERT INTO CATEGORIES VALUES (7, 'Dry Products', 'Dried fruits, raisins, others');
+INSERT INTO CATEGORIES VALUES (8, 'Fish and Seafood', 'Fish, seafood, snails');
+INSERT INTO CATEGORIES VALUES (9, 'Computer Equipment', 'Laptops, keyboards, mice');
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO CUSTOMERS VALUES ( 'BOTTM','Bottom-Dollar Markets','23 Tsawassen Blvd.','Tsawassen','T2F 8M4','Canada','(604) 555-4729','(604) 555-3745' );
+
+INSERT INTO CUSTOMERS VALUES ( 'BSBEV','B''s Beverages','Fauntleroy Circus','London','EC2 4SD','Royaume-Uni','(71) 555-1212','' );
+
+INSERT INTO CUSTOMERS VALUES ( 'CACTU','Cactus Comidas para llevar','Cerrito 333','Buenos Aires','1010','Argentine','(1) 135-5555','(1) 135-4892' );
+
+INSERT INTO CUSTOMERS VALUES ( 'CENTC','Centro comercial Moctezuma','Sierras de Granada 9993','México D.F.','05022','Mexique','(5) 555-3392','(5) 555-7293' );
+
+INSERT INTO CUSTOMERS VALUES ( 'CHOPS','Chop-suey Chinese','Hauptstr. 29','Bern','3012','Suisse','0452-076545','' );
+
+
+INSERT INTO CUSTOMERS VALUES ( 'COMMI','Comércio Mineiro','Av. dos Lusíadas, 23','São Paulo','05432-043','Brésil','(11) 555-7647','' );
+
+INSERT INTO CUSTOMERS VALUES ( 'CONSH','Consolidated Holdings','Berkeley Gardens12  Brewery ','London','WX1 4SD','Royaume-Uni','(71) 555-2282','(71) 555-9199' );
+
+INSERT INTO CUSTOMERS VALUES ( 'DRACD','Drachenblut Delikatessen','Walserweg 21','Aachen','52066','Allemagne','0241-039123','0241-059428' );
+
+INSERT INTO CUSTOMERS VALUES ( 'DUMON','Du monde entier','67, rue des Cinquante Otages','Nantes','44000','France','02.40.67.88.88','02.40.67.89.89' );
+
+INSERT INTO CUSTOMERS VALUES ( 'EASTC','Eastern Connection','35 King George','London','WX3 6FW','Royaume-Uni','(71) 555-0297','(71) 555-3373' );
+
+
+1. Afficher par ordre décroissant d'ancienneté les employés de sexe masculin dont le salaire net est supérieur ou égal à 8000
+
+ALTER TABLE EMPLOYEES ADD COLUMN SEX CHAR(1);
+
+SELECT 
+    EMPLOYEE_NUMBER,
+    RPAD(FIRST_NAME, 30) AS FIRST_NAME,
+    RPAD(LAST_NAME, 40) AS LAST_NAME,
+    TIMESTAMPDIFF(YEAR, BIRTH_DATE, CURDATE()) AS AGE,
+    TIMESTAMPDIFF(YEAR, HIRE_DATE, CURDATE()) AS TENURE
+FROM 
+    EMPLOYEES
+WHERE 
+    SEX = 'M' AND
+    (SALARY + COALESCE(COMMISSION, 0)) >= 8000
+ORDER BY 
+    TENURE DESC;
+
+2. Afficher les produits avec les critères spécifiés
+
+ALTER TABLE EMPLOYEES ADD COLUMN PACKAGES  CHAR(1);
+
+SELECT
+    PRODUCT_REF,
+    PRODUCT_NAME,
+    SUPPLIER_NUMBER,
+    UNIT_PRICE,
+    UNITS_ON_ORDER
+FROM
+    PRODUCTS
+WHERE
+    PACKAGES LIKE '%bottle%' AND
+    SUBSTRING(PRODUCT_NAME, 3, 1) IN ('t', 'T') AND
+    SUPPLIER_NUMBER IN (1, 2, 3) AND
+    UNIT_PRICE BETWEEN 70 AND 200 AND
+    UNITS_ON_ORDER IS NOT NULL
+LIMIT 25;
+3 Afficher les clients qui résident dans la même région que le fournisseur 1
+SELECT 
+    *
+FROM 
+   customers
+WHERE 
+    (COUNTRY, CITY, RIGHT(POSTAL_CODE, 3)) = (
+        SELECT 
+            COUNTRY, 
+            CITY, 
+            RIGHT(POSTAL_CODE, 3)
+        FROM 
+            suppliers
+        WHERE 
+            SUPPLIER_NUMBER = 1
+    );
+4. Afficher le nouveau taux de remise et le message d'application pour les commandes entre 10998 et 11003
+SELECT 
+    ORDER_NUMBER,
+    CASE
+        WHEN (UNIT_PRICE * QUANTITY) BETWEEN 0 AND 2000 THEN '0%'
+        WHEN (UNIT_PRICE * QUANTITY) BETWEEN 2001 AND 10000 THEN '5%'
+        WHEN (UNIT_PRICE * QUANTITY) BETWEEN 10001 AND 40000 THEN '10%'
+        WHEN (UNIT_PRICE * QUANTITY) BETWEEN 40001 AND 80000 THEN '15%'
+        ELSE '20%'
+    END AS NEW_DISCOUNT_RATE,
+    CASE
+        WHEN ORDER_NUMBER BETWEEN 10000 AND 10999 THEN 'Apply the old discount rate'
+        ELSE 'Apply the new discount rate'
+    END AS DISCOUNT_MESSAGE
+FROM 
+    ORDER_DETAILS
+WHERE 
+    ORDER_NUMBER BETWEEN 10998 AND 11003;
+
+
+5. Afficher les fournisseurs de boissons
+SELECT 
+    SUPPLIER_NUMBER,
+   COMPANY,
+    ADDRESS,
+    PHONE
+FROM 
+    suppliers
+WHERE 
+    COMPANY LIKE '%Beverages%';
+6. Afficher les clients de Berlin ayant commandé au maximum 1 produit de dessert
+SELECT 
+    C.CUSTOMER_CODE
+FROM 
+    CUSTOMERS C
+WHERE 
+    C.CITY = 'Berlin' 
+    AND C.CUSTOMER_CODE IN (
+        SELECT 
+            O.CUSTOMER_CODE
+        FROM 
+            orders O
+        JOIN 
+            order_details OD ON O.ORDER_NUMBER = OD.ORDER_NUMBER
+        JOIN 
+            products P ON OD.PRODUCT_REF = P.PRODUCT_REF
+        WHERE 
+            P.PRODUCT_NAME LIKE '%dessert%'
+        GROUP BY 
+            O.CUSTOMER_CODE
+        HAVING 
+            COUNT(DISTINCT OD.PRODUCT_REF) <= 1
+    )
+LIMIT 0, 25;
+7. Afficher les clients résidant en France et le montant total des commandes passées chaque lundi en avril 1998
+
+SELECT 
+    C.CUSTOMER_CODE,
+    C.COMPANY,
+    C.PHONE,
+    COALESCE(SUM(OD.UNIT_PRICE * OD.QUANTITY), 0) AS MONTANT_TOTAL,
+    C.COUNTRY
+FROM 
+    customers C
+LEFT JOIN 
+    ORDERS O ON C.CUSTOMER_CODE = O.CUSTOMER_CODE
+LEFT JOIN 
+    ORDER_DETAILS OD ON O.ORDER_NUMBER = OD.ORDER_NUMBER
+WHERE 
+    C.COUNTRY = 'France' AND
+    WEEKDAY(O.ORDER_NUMBER) = 0 AND  -- 0 = Lundi
+    O.ORDER_DATE BETWEEN '1998-04-01' AND '1998-04-30'
+GROUP BY 
+    C.CUSTOMER_CODE, C.COMPANY, C.PHONE, C.COUNTRY;
+
+8 Afficher les clients qui ont commandé tous les produits
+
+SELECT 
+    C.CUSTOMER_CODE,
+    C.COMPANY,
+    C.PHONE
+FROM 
+    customers C
+WHERE 
+    NOT EXISTS (
+        SELECT 
+            P.PRODUCT_REF
+        FROM 
+            products P
+        WHERE 
+            NOT EXISTS (
+                SELECT 
+                    OD.PRODUCT_REF #
+                FROM 
+                    order_details OD
+                JOIN 
+                    orders O ON OD.ORDER_NUMBER = O.ORDER_NUMBER
+                WHERE 
+                    O.CUSTOMER_CODE = C.CUSTOMER_CODE
+                AND 
+                    OD.PRODUCT_REF # = P.PRODUCT_REF
+            )
+    );
+
+9. Afficher pour chaque client de France le nombre de commandes passées
+
+SELECT 
+    C.CUSTOMER_CODE,
+    COUNT(O.ORDER_NUMBER) AS NOMBRE_DE_COMMANDES
+FROM 
+    customers C
+LEFT JOIN 
+    orders O ON C.CUSTOMER_CODE = O.CUSTOMER_CODE
+WHERE 
+    C.COUNTRY = 'France'
+GROUP BY 
+    C.CUSTOMER_CODE;
+
+10. Afficher le nombre de commandes passées en 1996, en 1997, et la différence entre ces deux nombres
+
+SELECT 
+    COUNT(CASE WHEN YEAR(O.ORDER_DATE) = 1996 THEN 1 END) AS COMMANDES_1996,
+    COUNT(CASE WHEN YEAR(O.ORDER_DATE) = 1997 THEN 1 END) AS COMMANDES_1997,
+    COUNT(CASE WHEN YEAR(O.ORDER_NUMBER) = 1997 THEN 1 END) - COUNT(CASE WHEN YEAR(O.ORDER_DATE) = 1996 THEN 1 END) AS DIFFÉRENCE
+FROM 
+    orders O
+WHERE 
+    YEAR(O.ORDER_NUMBER) IN (1996, 1997);
+
 
